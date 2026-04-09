@@ -1,0 +1,176 @@
+/* ── Timeline wrapper ────────────────────────────────────── */
+.exp-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+/* Vertical line */
+.exp-line {
+  position: absolute;
+  left: 28px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1px;
+}
+
+/* ── Row: year col + card ────────────────────────────────── */
+.exp-row {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* ── Year column ─────────────────────────────────────────── */
+.exp-year-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 58px;
+  padding-top: 4px;
+}
+
+.exp-year-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+.exp-dot-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.exp-year-label {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.exp-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  /* scroll-reveal driven by JS */
+  opacity: 0;
+  transform: scale(1.04);
+  will-change: transform, opacity;
+  transform-origin: center top;
+}
+
+.exp-card:hover {
+  border-color: rgba(108, 99, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Card header ─────────────────────────────────────────── */
+.exp-tag {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: .72rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.exp-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.exp-card h4 {
+  font-size: .875rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.exp-date {
+  font-size: .8rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.exp-date i { color: var(--primary); }
+
+.exp-desc {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* ── Image pair ──────────────────────────────────────────── */
+.exp-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.exp-img-wrap {
+  position: relative;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(108, 99, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exp-img-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 2rem;
+}
+
+.exp-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+}
+.exp-img.hidden { display: none; }
+.exp-img-wrap:hover .exp-img { transform: scale(1.04); }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .exp-row { flex-direction: column; gap: 16px; }
+  .exp-year-col { flex-direction: row; width: auto; }
+  .exp-line { left: 16px; }
+  .exp-images { grid-template-columns: 1fr; }
+}

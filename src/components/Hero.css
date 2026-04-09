@@ -1,0 +1,297 @@
+/* ── Section ──────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 24px 60px;
+}
+
+/* ── FluidGlass lens overlay ──────────────────────────────── */
+.hero-fluid-glass {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Aurora background ────────────────────────────────────── */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Two-column layout ────────────────────────────────────── */
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  margin: 0 auto;
+}
+
+/* ── LEFT ─────────────────────────────────────────────────── */
+.hero-left {
+  flex: 1;
+  max-width: 560px;
+}
+
+.hero-greeting {
+  font-size: .85rem;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero-name {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.hero-a {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.hero-title {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  color: var(--white);
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+  padding-bottom: 4px;
+  margin-bottom: 28px;
+}
+
+.hero-socials {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.hero-socials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.2);
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: .95rem;
+  transition: var(--transition);
+  background: rgba(255,255,255,.05);
+}
+.hero-socials a:hover {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.hero-desc {
+  font-size: .95rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 460px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  border: 2px solid rgba(255,255,255,.3);
+  color: var(--white);
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: .9rem;
+  transition: var(--transition);
+}
+.btn-outline:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,.08);
+}
+
+.btn-solid {
+  background: rgba(255,255,255,.12);
+  border: 2px solid rgba(255,255,255,.2);
+  backdrop-filter: blur(8px);
+  color: var(--white);
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: .9rem;
+  transition: var(--transition);
+}
+.btn-solid:hover {
+  background: rgba(255,255,255,.22);
+  transform: translateY(-2px);
+}
+
+/* ── RIGHT — Profile Card ────────────────────────────────── */
+.hero-right {
+  flex-shrink: 0;
+}
+
+/* ── Profile Card (photo style) ──────────────────────────── */
+.profile-card {
+  width: 280px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(15,15,30,.8);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 24px 60px rgba(0,0,0,.6);
+}
+
+/* Photo area */
+.profile-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  overflow: hidden;
+}
+
+.profile-photo-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.4);
+}
+
+.profile-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.profile-photo.hidden { display: none; }
+
+/* Gradient overlay for text readability */
+.profile-photo-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 60px 20px 18px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+}
+
+.profile-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 3px;
+}
+
+.profile-role {
+  font-size: .82rem;
+  color: rgba(255,255,255,0.65);
+  font-weight: 500;
+}
+
+/* Footer */
+.profile-card-footer {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.profile-handle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .78rem;
+  color: var(--muted);
+}
+.profile-handle i { color: var(--primary); font-size: .85rem; }
+
+.profile-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  color: var(--muted);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  flex-shrink: 0;
+}
+
+.contact-me-btn {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  color: var(--white);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: .72rem;
+  font-weight: 600;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.contact-me-btn:hover { background: var(--primary); border-color: var(--primary); }
+
+/* ── Scroll indicator ────────────────────────────────────── */
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+  z-index: 2;
+}
+.hero-scroll a { color: var(--muted); font-size: 1.2rem; }
+
+@keyframes bounce {
+  0%,100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 8px); }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 20px;
+  }
+  .hero-left { max-width: 100%; }
+  .hero-greeting, .hero-a { text-align: center; }
+  .hero-title { display: block; text-align: center; }
+  .hero-socials { justify-content: center; }
+  .hero-desc { margin: 0 auto 32px; }
+  .hero-cta { justify-content: center; }
+  .profile-card { width: 280px; }
+}

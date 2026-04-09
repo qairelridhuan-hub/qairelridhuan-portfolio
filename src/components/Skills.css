@@ -1,0 +1,123 @@
+/* ── Tools Grid ─────────────────────────────────────────────────── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 900px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .tools-grid { grid-template-columns: 1fr; } }
+
+/* ── Tool Card ───────────────────────────────────────────────────── */
+.tool-card {
+  background: rgba(20, 20, 35, 0.85);
+  border: 1px solid rgba(108, 99, 255, 0.15);
+  border-radius: 12px;
+  padding: 16px 18px 0;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.tool-card:hover {
+  border-color: var(--primary);
+}
+
+.tool-card-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.tool-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tool-card-left i {
+  font-size: 1.4rem;
+  color: var(--primary);
+  width: 26px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.tool-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tool-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1;
+}
+
+.tool-category {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.tool-pct {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+/* ── Progress Bar ────────────────────────────────────────────────── */
+.tool-progress-track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0 -18px;
+}
+
+.tool-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), #ff9ffc);
+  border-radius: 0;
+  transition: width 1s ease;
+}
+
+/* ── Marquee Strip ───────────────────────────────────────────────── */
+.tech-marquee-wrapper {
+  overflow: hidden;
+  border-top: 1px solid rgba(108, 99, 255, 0.15);
+  border-bottom: 1px solid rgba(108, 99, 255, 0.15);
+  background: rgba(15, 15, 26, 0.9);
+  padding: 14px 0;
+  margin-top: 56px;
+}
+
+.tech-marquee {
+  display: flex;
+  gap: 48px;
+  width: max-content;
+  animation: marquee-scroll 35s linear infinite;
+}
+
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.marquee-item i {
+  font-size: 1rem;
+  color: var(--primary);
+}
+
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
