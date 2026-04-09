@@ -157,17 +157,25 @@ export default function Plasma({
     setSize();
 
     let raf = 0;
+    let isVisible = false;
     const t0 = performance.now();
     const loop = t => {
+      if (!isVisible) return;
       program.uniforms.iTime.value = (t - t0) * 0.001;
       renderer.render({ scene: mesh });
       raf = requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
+
+    const io = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) raf = requestAnimationFrame(loop);
+    }, { threshold: 0.05 });
+    io.observe(containerEl);
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
       if (mouseInteractive && containerEl) containerEl.removeEventListener('mousemove', handleMouseMove);
       try { containerEl?.removeChild(canvas); } catch { /* already removed */ }
     };

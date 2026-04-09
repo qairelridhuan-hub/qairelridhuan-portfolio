@@ -158,7 +158,15 @@ export default function Threads({ color = [1, 1, 1], amplitude = 1, distance = 0
       container.addEventListener('mouseleave', handleMouseLeave);
     }
 
+    let isVisible = false;
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) animationFrameId.current = requestAnimationFrame(update);
+    }, { threshold: 0.05 });
+    observer.observe(container);
+
     function update(t) {
+      if (!isVisible) return;
       if (enableMouseInteraction) {
         currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
         currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);
@@ -169,10 +177,10 @@ export default function Threads({ color = [1, 1, 1], amplitude = 1, distance = 0
       renderer.render({ scene: mesh });
       animationFrameId.current = requestAnimationFrame(update);
     }
-    animationFrameId.current = requestAnimationFrame(update);
 
     return () => {
       cancelAnimationFrame(animationFrameId.current);
+      observer.disconnect();
       window.removeEventListener('resize', resize);
       if (enableMouseInteraction) {
         container.removeEventListener('mousemove', handleMouseMove);
