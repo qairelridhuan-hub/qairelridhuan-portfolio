@@ -61,9 +61,11 @@ export default function Projects() {
   return (
     <section id="projects">
       <div className="container">
-        <h2 className="section-title">Projects</h2>
-        <div className="projects-grid">
-          {projects.map((p, i) => <ProjectCard key={i} project={p} />)}
+        <div className="glass-panel">
+          <h2 className="section-title">Projects</h2>
+          <div className="projects-grid">
+            {projects.map((p, i) => <ProjectCard key={i} project={p} />)}
+          </div>
         </div>
       </div>
     </section>

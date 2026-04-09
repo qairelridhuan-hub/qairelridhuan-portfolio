@@ -1,20 +1,20 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --primary:    #6c63ff;
-  --primary-dk: #4f46e5;
+  --primary:    #e2e2e2;
+  --primary-dk: #ffffff;
   --accent:     #f59e0b;
-  --bg:         #0f0f1a;
-  --bg2:        #161628;
-  --bg3:        #1e1e36;
-  --card:       #1a1a2e;
-  --border:     rgba(108,99,255,.2);
-  --text:       #e2e2f0;
-  --muted:      #9090b0;
+  --bg:         #0a0a0a;
+  --bg2:        #111111;
+  --bg3:        #1a1a1a;
+  --card:       #141414;
+  --border:     rgba(255,255,255,.1);
+  --text:       #e2e2e2;
+  --muted:      #888888;
   --white:      #ffffff;
   --green:      #10b981;
   --radius:     12px;
-  --shadow:     0 8px 32px rgba(0,0,0,.4);
+  --shadow:     0 8px 32px rgba(0,0,0,.6);
   --transition: .3s ease;
 }
 

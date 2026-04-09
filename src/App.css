@@ -10,7 +10,22 @@ section {
 }
 
 section:nth-of-type(even) {
-  background: var(--bg2);
+  background: transparent;
+}
+
+/* Glass section panel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 60px 48px;
+  margin: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .glass-panel { padding: 40px 24px; margin: 0 12px; }
 }
 
 .section-title {

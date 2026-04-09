@@ -1,8 +1,10 @@
 .contact-intro { text-align: center; color: var(--muted); max-width: 520px; margin: -36px auto 44px; font-size: .95rem; }
 .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
 .contact-card {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius);
   padding: 32px 24px;
   text-align: center;

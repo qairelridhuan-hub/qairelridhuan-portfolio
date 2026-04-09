@@ -1,6 +1,5 @@
 import useTypewriter from '../hooks/useTypewriter'
-import DarkVeil from './DarkVeil'
-import FluidGlass from './FluidGlass'
+import Plasma from './Plasma'
 import './Hero.css'
 
 const roles = [
@@ -15,27 +14,13 @@ export default function Hero() {
   return (
     <section id="hero">
       <div className="hero-bg">
-        <DarkVeil
-          hueShift={0}
-          noiseIntensity={0}
-          scanlineIntensity={0}
-          speed={0.5}
-          scanlineFrequency={0}
-          warpAmount={0}
-        />
-      </div>
-
-      {/* FluidGlass lens cursor effect */}
-      <div className="hero-fluid-glass">
-        <FluidGlass
-          mode="lens"
-          lensProps={{
-            scale: 0.25,
-            ior: 1.15,
-            thickness: 5,
-            chromaticAberration: 0.1,
-            anisotropy: 0.01,
-          }}
+        <Plasma
+          color="#ffffff"
+          speed={0.6}
+          direction="forward"
+          scale={1.1}
+          opacity={0.8}
+          mouseInteractive={true}
         />
       </div>
 

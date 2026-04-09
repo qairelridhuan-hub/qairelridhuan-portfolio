@@ -26,10 +26,12 @@ export default function Contact() {
   return (
     <section id="contact">
       <div className="container">
-        <h2 className="section-title">Get In Touch</h2>
-        <p className="contact-intro">I'm open to internship opportunities, collaborations, and new projects. Feel free to reach out!</p>
-        <div className="contact-grid">
-          {contacts.map((c, i) => <ContactCard key={i} {...c} />)}
+        <div className="glass-panel">
+          <h2 className="section-title">Get In Touch</h2>
+          <p className="contact-intro">I'm open to internship opportunities, collaborations, and new projects. Feel free to reach out!</p>
+          <div className="contact-grid">
+            {contacts.map((c, i) => <ContactCard key={i} {...c} />)}
+          </div>
         </div>
       </div>
     </section>

@@ -1,13 +1,15 @@
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 28px; }
 .project-card {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius);
   padding: 32px;
   transition: var(--transition);
 }
 .project-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow); }
-.project-card.featured-project { border-color: rgba(108,99,255,.4); }
+.project-card.featured-project { border-color: rgba(220,220,220,.4); }
 .project-header { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 16px; }
 .project-icon {
   flex-shrink: 0;
@@ -17,7 +19,7 @@
   display: grid; place-items: center;
   font-size: 1.4rem;
   color: var(--white);
-  box-shadow: 0 4px 16px rgba(108,99,255,.4);
+  box-shadow: 0 4px 16px rgba(220,220,220,.4);
 }
 .project-badge {
   display: inline-block;
@@ -37,8 +39,8 @@
 .project-highlights li::before { content: '→'; position: absolute; left: 0; color: var(--primary); }
 .project-stack { display: flex; flex-wrap: wrap; gap: 8px; }
 .project-stack span {
-  background: rgba(108,99,255,.1);
-  border: 1px solid rgba(108,99,255,.25);
+  background: rgba(220,220,220,.1);
+  border: 1px solid rgba(220,220,220,.25);
   color: var(--primary);
   padding: 3px 10px;
   border-radius: 20px;

@@ -1,5 +1,5 @@
 import useFadeIn from '../hooks/useFadeIn'
-import LiquidEther from './LiquidEther'
+import Threads from './Threads'
 import './Achievements.css'
 
 const list = [
@@ -27,7 +27,7 @@ export default function Achievements() {
   return (
     <section id="achievements" className="aurora-section">
       <div className="aurora-bg">
-        <LiquidEther colors={['#5227FF', '#FF9FFC', '#B19EEF']} autoDemo autoSpeed={0.3} autoIntensity={1.5} resolution={0.3} />
+        <Threads amplitude={1} distance={0} enableMouseInteraction color={[1, 1, 1]} />
       </div>
       <div className="container">
         <h2 className="section-title">Achievements</h2>

@@ -15,7 +15,7 @@ const items = [
     popup: {
       image: '/images/edu-degree.png',
       fallbackIcon: 'fas fa-graduation-cap',
-      fallbackGradient: 'linear-gradient(135deg, #6c63ff 0%, #4f46e5 100%)',
+      fallbackGradient: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
       caption: 'UTHM — Degree Programme',
       desc: "Pursuing a Bachelor's degree in Computer Science (Software Engineering), specialising in mobile and web application development.",
     },
@@ -34,7 +34,7 @@ const items = [
       image: '/images/pagoh.jpeg',
       imagePosition: 'center 78%',
       fallbackIcon: 'fas fa-university',
-      fallbackGradient: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+      fallbackGradient: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
       caption: 'UTHM — Diploma Programme',
       desc: 'Completed Diploma in Information Technology with consistently high GPA, building a strong foundation in programming and IT systems.',
     },
@@ -130,9 +130,11 @@ export default function Education() {
   return (
     <section id="education">
       <div className="container">
-        <h2 className="section-title">Education</h2>
-        <div className="timeline">
-          {items.map((item, i) => <TimelineItem key={i} item={item} />)}
+        <div className="glass-panel">
+          <h2 className="section-title">Education</h2>
+          <div className="timeline">
+            {items.map((item, i) => <TimelineItem key={i} item={item} />)}
+          </div>
         </div>
       </div>
     </section>

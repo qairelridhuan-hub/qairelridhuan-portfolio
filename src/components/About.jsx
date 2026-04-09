@@ -6,6 +6,7 @@ export default function About() {
   return (
     <section id="about">
       <div className="container">
+        <div className="glass-panel">
         <h2 className="section-title">About Me</h2>
         <div className="about-grid fade-in" ref={ref}>
           <div className="about-avatar">
@@ -22,6 +23,7 @@ export default function About() {
             <p>Alongside software development, I have practical IT experience from my internship at <strong>Aptiv</strong>, involving PC troubleshooting, network setup, hardware upgrades, and system configuration across multiple departments.</p>
             <p>Known for <strong>adaptability, analytical thinking, teamwork, and problem-solving</strong>, I aim to contribute effectively in dynamic environments while continuously improving my technical skill set.</p>
           </div>
+        </div>
         </div>
       </div>
     </section>
