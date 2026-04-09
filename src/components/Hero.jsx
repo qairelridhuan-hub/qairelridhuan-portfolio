@@ -1,16 +1,7 @@
-import useTypewriter from '../hooks/useTypewriter'
 import Plasma from './Plasma'
 import './Hero.css'
 
-const roles = [
-  'Software Engineering Undergraduate',
-  'React & Mobile Developer',
-  'IT Support Specialist',
-]
-
 export default function Hero() {
-  const typed = useTypewriter(roles)
-
   return (
     <section id="hero">
       <div className="hero-bg">
@@ -34,11 +25,7 @@ export default function Hero() {
             Bin Muhamad
           </h1>
 
-          <p className="hero-a">A</p>
-          <h2 className="hero-title">
-            <span className="typewriter-text">{typed}</span>
-            <span className="typewriter-cursor">|</span>
-          </h2>
+          <h2 className="hero-title">Software Engineer</h2>
 
           <div className="hero-socials">
             <a href="https://www.linkedin.com/in/qairel-ridhuan093b09256/" target="_blank" rel="noreferrer" title="LinkedIn">

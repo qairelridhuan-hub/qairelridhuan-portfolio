@@ -24,9 +24,9 @@ uniform vec2 uMouse;
 
 #define PI 3.1415926538
 
-const int u_line_count = 40;
+const int u_line_count = 24;
 const float u_line_width = 7.0;
-const float u_line_blur = 10.0;
+const float u_line_blur = 8.0;
 
 float Perlin2D(vec2 P) {
     vec2 Pi = floor(P);
@@ -111,7 +111,7 @@ export default function Threads({ color = [1, 1, 1], amplitude = 1, distance = 0
     if (!containerRef.current) return;
     const container = containerRef.current;
 
-    const renderer = new Renderer({ alpha: true });
+    const renderer = new Renderer({ alpha: true, dpr: Math.min(window.devicePixelRatio || 1, 1) });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
@@ -134,12 +134,16 @@ export default function Threads({ color = [1, 1, 1], amplitude = 1, distance = 0
 
     const mesh = new Mesh(gl, { geometry, program });
 
+    let resizeTimer;
     function resize() {
-      const { clientWidth, clientHeight } = container;
-      renderer.setSize(clientWidth, clientHeight);
-      program.uniforms.iResolution.value.r = clientWidth;
-      program.uniforms.iResolution.value.g = clientHeight;
-      program.uniforms.iResolution.value.b = clientWidth / clientHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const { clientWidth, clientHeight } = container;
+        renderer.setSize(clientWidth, clientHeight);
+        program.uniforms.iResolution.value.r = clientWidth;
+        program.uniforms.iResolution.value.g = clientHeight;
+        program.uniforms.iResolution.value.b = clientWidth / clientHeight;
+      }, 100);
     }
     window.addEventListener('resize', resize);
     resize();

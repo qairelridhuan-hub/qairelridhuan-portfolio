@@ -55,19 +55,10 @@
   margin-bottom: 20px;
 }
 
-.hero-a {
-  font-size: 1rem;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-
 .hero-title {
   font-size: clamp(1rem, 2.5vw, 1.35rem);
   font-weight: 700;
   color: var(--white);
-  border-bottom: 2px solid var(--primary);
-  display: inline-block;
-  padding-bottom: 4px;
   margin-bottom: 28px;
 }
 
@@ -280,7 +271,7 @@
     padding-top: 20px;
   }
   .hero-left { max-width: 100%; }
-  .hero-greeting, .hero-a { text-align: center; }
+  .hero-greeting { text-align: center; }
   .hero-title { display: block; text-align: center; }
   .hero-socials { justify-content: center; }
   .hero-desc { margin: 0 auto 32px; }
