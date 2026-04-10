@@ -1,5 +1,29 @@
+import { useRef } from 'react'
 import Plasma from './Plasma'
 import './Hero.css'
+
+function TiltCard({ children }) {
+  const ref = useRef(null)
+
+  const onMove = e => {
+    const card = ref.current
+    if (!card) return
+    const { left, top, width, height } = card.getBoundingClientRect()
+    const x = (e.clientX - left) / width  - 0.5
+    const y = (e.clientY - top)  / height - 0.5
+    card.style.transform = `perspective(800px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.03)`
+  }
+
+  const onLeave = () => {
+    if (ref.current) ref.current.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) scale(1)'
+  }
+
+  return (
+    <div ref={ref} className="tilt-card" onMouseMove={onMove} onMouseLeave={onLeave}>
+      {children}
+    </div>
+  )
+}
 
 export default function Hero() {
   return (
@@ -28,7 +52,7 @@ export default function Hero() {
           <h2 className="hero-title">Software Engineer</h2>
 
           <div className="hero-socials">
-            <a href="https://www.linkedin.com/in/qairel-ridhuan093b09256/" target="_blank" rel="noreferrer" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/qairel-ridhuan-093b09256/" target="_blank" rel="noreferrer" title="LinkedIn">
               <i className="fab fa-linkedin-in"></i>
             </a>
             <a href="mailto:qayyumqairel1811@gmail.com" title="Email">
@@ -51,6 +75,7 @@ export default function Hero() {
 
         {/* RIGHT COLUMN — Profile Card */}
         <div className="hero-right">
+          <TiltCard>
           <div className="profile-card">
             {/* Photo fills the card */}
             <div className="profile-photo-wrap">
@@ -76,6 +101,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
+          </TiltCard>
         </div>
       </div>
 

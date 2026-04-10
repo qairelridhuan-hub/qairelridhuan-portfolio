@@ -1,0 +1,30 @@
+.cursor-dot,
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  will-change: transform;
+  transform: translate(-9999px, -9999px);
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  margin-left: -3px;
+  margin-top: -3px;
+}
+
+.cursor-glow {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 65%);
+  margin-left: -160px;
+  margin-top: -160px;
+}
+
+@media (hover: none) {
+  .cursor-dot, .cursor-glow { display: none; }
+}

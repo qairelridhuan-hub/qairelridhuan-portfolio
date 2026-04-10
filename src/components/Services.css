@@ -1,6 +1,10 @@
 /* ── Section wrapper ──────────────────────────────────────── */
 #services {
-  padding-top: 100px;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: block !important;
+  min-height: unset !important;
+  justify-content: unset !important;
 }
 
 .svc-header {
@@ -29,7 +33,7 @@
 
 /* ── Scroll driver — tall enough to scroll through 4 cards ── */
 .svc-scroll-wrapper {
-  height: 500vh;
+  height: 280vh;
   position: relative;
 }
 
@@ -39,8 +43,9 @@
   top: 0;
   height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding-top: 80px;
   overflow: hidden;
 }
 
@@ -144,9 +149,6 @@
 }
 
 /* ── After scroll wrapper — give breathing room ───────────── */
-#services + * {
-  padding-top: 100px;
-}
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 768px) {

@@ -48,7 +48,7 @@ function ServiceCard({ service, index, total, scrollYProgress }) {
   const activePoint = index === n ? 0.88 : index / n
   const exitEnd = index === n ? 1 : (index + 0.4) / n
 
-  const springCfg = { stiffness: 60, damping: 20, mass: 1 }
+  const springCfg = { stiffness: 200, damping: 30, mass: 0.5 }
 
   const rawY = useTransform(
     scrollYProgress,
@@ -73,7 +73,7 @@ function ServiceCard({ service, index, total, scrollYProgress }) {
       ? [0, 1, 1]
       : [0, 1, 1, 0],
   )
-  const opacity = useSpring(rawOpacity, { stiffness: 50, damping: 18 })
+  const opacity = useSpring(rawOpacity, { stiffness: 200, damping: 30, mass: 0.5 })
 
   const rawBlur = useTransform(
     scrollYProgress,

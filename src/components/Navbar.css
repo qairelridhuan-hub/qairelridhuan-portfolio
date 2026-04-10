@@ -5,7 +5,19 @@
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  transition: background var(--transition), box-shadow var(--transition), backdrop-filter var(--transition);
+  transition: background var(--transition), box-shadow var(--transition), backdrop-filter var(--transition), opacity 0.4s ease, transform 0.4s ease;
+}
+
+#navbar.nav-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#navbar.nav-hidden {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
 }
 #navbar.scrolled {
   background: transparent;

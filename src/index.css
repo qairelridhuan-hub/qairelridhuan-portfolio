@@ -18,7 +18,11 @@
   --transition: .3s ease;
 }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  scroll-snap-type: y proximity;
+}
 
 body {
   font-family: 'Inter', sans-serif;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './Navbar.css'
 
 const links = ['about','skills','education','experience','projects','services','contact']
@@ -17,17 +17,48 @@ function getScale(hoveredIdx, idx) {
 }
 
 export default function Navbar() {
-  const [open, setOpen]         = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [active, setActive]     = useState('')
+  const [open, setOpen]       = useState(false)
+  const [active, setActive]   = useState('')
   const [hoveredIdx, setHovered] = useState(null)
+  const [visible, setVisible] = useState(true)
 
+  const hideTimer   = useRef(null)
+  const scrollTimer = useRef(null)
+
+  // Show navbar and reset the hide timer
+  const show = () => {
+    setVisible(true)
+    clearTimeout(hideTimer.current)
+    hideTimer.current = setTimeout(() => setVisible(false), 3000)
+  }
+
+  // Hide immediately when scrolling starts; show when it stops
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    const onScroll = () => {
+      setVisible(false)
+      clearTimeout(scrollTimer.current)
+      scrollTimer.current = setTimeout(() => {
+        // scroll stopped — wait for cursor move to show again
+      }, 150)
+    }
+
+    const onMouseMove = () => show()
+
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('mousemove', onMouseMove)
+
+    // Initial hide timer
+    hideTimer.current = setTimeout(() => setVisible(false), 3000)
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('mousemove', onMouseMove)
+      clearTimeout(hideTimer.current)
+      clearTimeout(scrollTimer.current)
+    }
   }, [])
 
+  // Active section tracking
   useEffect(() => {
     const sections = links.map(id => document.getElementById(id)).filter(Boolean)
     const pick = () => {
@@ -48,15 +79,12 @@ export default function Navbar() {
   return (
     <nav
       id="navbar"
-      className={scrolled ? 'scrolled' : ''}
-      onMouseEnter={e => e.currentTarget.classList.add('nav-hover')}
+      className={visible ? 'nav-visible' : 'nav-hidden'}
+      onMouseEnter={e => { e.currentTarget.classList.add('nav-hover'); show() }}
       onMouseLeave={e => e.currentTarget.classList.remove('nav-hover')}
     >
       <div className="nav-container">
-        <ul
-          className="nav-links"
-          onMouseLeave={() => setHovered(null)}
-        >
+        <ul className="nav-links" onMouseLeave={() => setHovered(null)}>
           {links.map((l, i) => {
             const scale = getScale(hoveredIdx, i)
             return (
