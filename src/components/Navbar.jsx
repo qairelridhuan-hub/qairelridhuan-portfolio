@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import './Navbar.css'
 
-const links = ['about','skills','education','experience','projects','achievements','contact']
+const links = ['about','skills','education','experience','projects','services','contact']
 
-const MAX_SCALE   = 1.55   // hovered item scale
-const MID_SCALE   = 1.25   // immediate neighbours
-const NEAR_SCALE  = 1.08   // two away
-const RADIUS      = 2      // items affected on each side
+const MAX_SCALE  = 1.55
+const MID_SCALE  = 1.25
+const NEAR_SCALE = 1.08
 
 function getScale(hoveredIdx, idx) {
   if (hoveredIdx === null) return 1

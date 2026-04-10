@@ -10,16 +10,17 @@
 
 /* ── Tool Card ───────────────────────────────────────────────────── */
 .tool-card {
-  background: rgba(20, 20, 35, 0.85);
-  border: 1px solid rgba(220, 220, 220, 0.15);
+  background: #ffffff;
+  border: none;
   border-radius: 12px;
   padding: 16px 18px 0;
   overflow: hidden;
-  transition: border-color 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tool-card:hover {
-  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
 
 .tool-card-main {
@@ -37,7 +38,7 @@
 
 .tool-card-left i {
   font-size: 1.4rem;
-  color: var(--primary);
+  color: #222;
   width: 26px;
   text-align: center;
   flex-shrink: 0;
@@ -51,35 +52,35 @@
 
 .tool-name {
   font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text);
+  font-weight: 700;
+  color: #111;
   line-height: 1;
 }
 
 .tool-category {
   font-size: 0.6rem;
   font-weight: 700;
-  color: var(--muted);
+  color: #888;
   letter-spacing: 0.1em;
 }
 
 .tool-pct {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--text);
+  color: #111;
   flex-shrink: 0;
 }
 
 /* ── Progress Bar ────────────────────────────────────────────────── */
 .tool-progress-track {
   height: 3px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.08);
   margin: 0 -18px;
 }
 
 .tool-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary), #ff9ffc);
+  background: #111;
   border-radius: 0;
   transition: width 1s ease;
 }

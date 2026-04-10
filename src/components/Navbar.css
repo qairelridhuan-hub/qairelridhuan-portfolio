@@ -2,23 +2,20 @@
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  transition: background var(--transition), box-shadow var(--transition);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background var(--transition), box-shadow var(--transition), backdrop-filter var(--transition);
 }
 #navbar.scrolled {
-  background: rgba(10, 10, 20, 0.55);
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.35);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  box-shadow: none;
 }
 
 #navbar.nav-hover,
 #navbar.scrolled.nav-hover {
   background: transparent;
   box-shadow: none;
-  border-bottom-color: transparent;
 }
 
 .nav-container {
@@ -102,19 +99,10 @@
 
 /* ── Contact button ──────────────────────────────────────── */
 .btn-nav {
-  background: var(--primary) !important;
-  color: var(--white) !important;
-  padding: 8px 18px !important;
-  border-radius: 8px;
   animation: none !important;
 }
-.btn-nav:hover { background: var(--primary-dk) !important; }
 
 .btn-nav-active {
-  background: var(--primary) !important;
-  color: var(--white) !important;
-  padding: 8px 18px !important;
-  border-radius: 8px;
   box-shadow: 0 0 18px rgba(220, 220, 220, 0.7) !important;
   animation: nav-glow-pulse 2.4s ease-in-out infinite !important;
 }

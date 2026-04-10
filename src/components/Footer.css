@@ -1,6 +1,5 @@
 footer {
-  background: var(--bg);
-  border-top: 1px solid var(--border);
+  background: transparent;
   padding: 28px 24px;
   text-align: center;
   font-size: .85rem;

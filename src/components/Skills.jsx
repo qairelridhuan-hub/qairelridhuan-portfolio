@@ -3,28 +3,28 @@ import Threads from './Threads'
 import './Skills.css'
 
 const tools = [
-  { icon: 'fab fa-java',        name: 'Java',           category: 'LANGUAGE',        pct: 80 },
-  { icon: 'fab fa-python',      name: 'Python',         category: 'LANGUAGE',        pct: 75 },
-  { icon: 'fab fa-js',          name: 'JavaScript',     category: 'LANGUAGE',        pct: 85 },
-  { icon: 'fab fa-html5',       name: 'HTML5',          category: 'LANGUAGE',        pct: 90 },
-  { icon: 'fab fa-css3-alt',    name: 'CSS3',           category: 'LANGUAGE',        pct: 85 },
-  { icon: 'fab fa-php',         name: 'PHP',            category: 'LANGUAGE',        pct: 70 },
-  { icon: 'fab fa-react',       name: 'React',          category: 'FRAMEWORK',       pct: 80 },
-  { icon: 'fab fa-react',       name: 'React Native',   category: 'FRAMEWORK',       pct: 75 },
-  { icon: 'fas fa-mobile-alt',  name: 'Flutter',        category: 'FRAMEWORK',       pct: 70 },
-  { icon: 'fas fa-fire',        name: 'Firebase',       category: 'PLATFORM',        pct: 75 },
-  { icon: 'fab fa-node',        name: 'Node.js',        category: 'RUNTIME',         pct: 75 },
-  { icon: 'fas fa-layer-group', name: 'Django',         category: 'FRAMEWORK',       pct: 65 },
-  { icon: 'fab fa-github',      name: 'GitHub',         category: 'VERSION CONTROL', pct: 90 },
-  { icon: 'fab fa-gitlab',      name: 'GitLab',         category: 'VERSION CONTROL', pct: 85 },
-  { icon: 'fab fa-git-alt',     name: 'Git',            category: 'VERSION CONTROL', pct: 85 },
-  { icon: 'fas fa-database',    name: 'MS SQL Server',  category: 'DATABASE',        pct: 75 },
-  { icon: 'fas fa-database',    name: 'MySQL',          category: 'DATABASE',        pct: 80 },
-  { icon: 'fas fa-database',    name: 'PostgreSQL',     category: 'DATABASE',        pct: 70 },
-  { icon: 'fab fa-figma',       name: 'Figma',          category: 'DESIGN TOOL',     pct: 80 },
-  { icon: 'fas fa-vial',        name: 'Postman',        category: 'API TOOL',        pct: 80 },
-  { icon: 'fas fa-gamepad',     name: 'Unity',          category: 'GAME ENGINE',     pct: 75 },
-  { icon: 'fas fa-bolt',        name: 'Vite',           category: 'BUILD TOOL',      pct: 80 },
+  { icon: 'fab fa-java',        name: 'Java',           category: 'LANGUAGE',        pct: 80, color: '#f89820' },
+  { icon: 'fab fa-python',      name: 'Python',         category: 'LANGUAGE',        pct: 75, color: '#3776ab' },
+  { icon: 'fab fa-js',          name: 'JavaScript',     category: 'LANGUAGE',        pct: 85, color: '#f7df1e' },
+  { icon: 'fab fa-html5',       name: 'HTML5',          category: 'LANGUAGE',        pct: 90, color: '#e34f26' },
+  { icon: 'fab fa-css3-alt',    name: 'CSS3',           category: 'LANGUAGE',        pct: 85, color: '#1572b6' },
+  { icon: 'fab fa-php',         name: 'PHP',            category: 'LANGUAGE',        pct: 70, color: '#777bb4' },
+  { icon: 'fab fa-react',       name: 'React',          category: 'FRAMEWORK',       pct: 80, color: '#61dafb' },
+  { icon: 'fab fa-react',       name: 'React Native',   category: 'FRAMEWORK',       pct: 75, color: '#61dafb' },
+  { icon: 'fas fa-mobile-alt',  name: 'Flutter',        category: 'FRAMEWORK',       pct: 70, color: '#54c5f8' },
+  { icon: 'fas fa-fire',        name: 'Firebase',       category: 'PLATFORM',        pct: 75, color: '#ffca28' },
+  { icon: 'fab fa-node',        name: 'Node.js',        category: 'RUNTIME',         pct: 75, color: '#6cc24a' },
+  { icon: 'fas fa-layer-group', name: 'Django',         category: 'FRAMEWORK',       pct: 65, color: '#092e20' },
+  { icon: 'fab fa-github',      name: 'GitHub',         category: 'VERSION CONTROL', pct: 90, color: '#ffffff' },
+  { icon: 'fab fa-gitlab',      name: 'GitLab',         category: 'VERSION CONTROL', pct: 85, color: '#fc6d26' },
+  { icon: 'fab fa-git-alt',     name: 'Git',            category: 'VERSION CONTROL', pct: 85, color: '#f05032' },
+  { icon: 'fas fa-database',    name: 'MS SQL Server',  category: 'DATABASE',        pct: 75, color: '#cc2927' },
+  { icon: 'fas fa-database',    name: 'MySQL',          category: 'DATABASE',        pct: 80, color: '#4479a1' },
+  { icon: 'fas fa-database',    name: 'PostgreSQL',     category: 'DATABASE',        pct: 70, color: '#336791' },
+  { icon: 'fab fa-figma',       name: 'Figma',          category: 'DESIGN TOOL',     pct: 80, color: '#f24e1e' },
+  { icon: 'fas fa-vial',        name: 'Postman',        category: 'API TOOL',        pct: 80, color: '#ff6c37' },
+  { icon: 'fas fa-gamepad',     name: 'Unity',          category: 'GAME ENGINE',     pct: 75, color: '#ffffff' },
+  { icon: 'fas fa-bolt',        name: 'Vite',           category: 'BUILD TOOL',      pct: 80, color: '#646cff' },
 ]
 
 const marqueeItems = [
@@ -44,13 +44,13 @@ const marqueeItems = [
   { icon: 'fab fa-node',        name: 'Node.js'      },
 ]
 
-function ToolCard({ icon, name, category, pct }) {
+function ToolCard({ icon, name, category, pct, color }) {
   const ref = useFadeIn()
   return (
     <div className="tool-card fade-in" ref={ref}>
       <div className="tool-card-main">
         <div className="tool-card-left">
-          <i className={icon}></i>
+          <i className={icon} style={{ color }}></i>
           <div className="tool-info">
             <span className="tool-name">{name}</span>
             <span className="tool-category">{category}</span>
@@ -59,7 +59,7 @@ function ToolCard({ icon, name, category, pct }) {
         <span className="tool-pct">{pct}%</span>
       </div>
       <div className="tool-progress-track">
-        <div className="tool-progress-bar" style={{ width: `${pct}%` }}></div>
+        <div className="tool-progress-bar" style={{ width: `${pct}%`, background: color }}></div>
       </div>
     </div>
   )

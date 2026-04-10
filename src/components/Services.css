@@ -1,0 +1,160 @@
+/* ── Section wrapper ──────────────────────────────────────── */
+#services {
+  padding-top: 100px;
+}
+
+.svc-header {
+  margin-bottom: 60px;
+}
+
+.svc-heading {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.svc-subheading {
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.svc-subdesc {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.75;
+  max-width: 580px;
+}
+
+/* ── Scroll driver — tall enough to scroll through 4 cards ── */
+.svc-scroll-wrapper {
+  height: 500vh;
+  position: relative;
+}
+
+/* ── Sticky viewport ──────────────────────────────────────── */
+.svc-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Stack container ──────────────────────────────────────── */
+.svc-stack {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  height: 320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Individual card ──────────────────────────────────────── */
+.svc-card {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  border-radius: 24px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  overflow: hidden;
+  will-change: transform, opacity, filter;
+  cursor: default;
+  transform-origin: center bottom;
+}
+
+/* ── Left text ────────────────────────────────────────────── */
+.svc-left {
+  padding: 44px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.svc-number {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #bbb;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.svc-title {
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  font-weight: 800;
+  color: #111;
+  line-height: 1.2;
+}
+
+.svc-desc {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.75;
+  max-width: 440px;
+}
+
+.svc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.svc-tags span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #444;
+  background: #f2f2f2;
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+
+/* ── Right visual ─────────────────────────────────────────── */
+.svc-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.svc-icon-wrap {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  display: grid;
+  place-items: center;
+  font-size: 2.4rem;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+}
+
+.svc-glow {
+  position: absolute;
+  inset: -30%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── After scroll wrapper — give breathing room ───────────── */
+#services + * {
+  padding-top: 100px;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .svc-scroll-wrapper { height: 450vh; }
+  .svc-stack { height: 420px; }
+  .svc-card {
+    grid-template-columns: 1fr;
+  }
+  .svc-right { min-height: 140px; }
+  .svc-left { padding: 28px 24px; }
+}
