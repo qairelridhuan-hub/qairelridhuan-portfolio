@@ -1,3 +1,12 @@
+/* ── Section Override ─────────────────────────────────────── */
+#contact {
+  min-height: 100vh;
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+
 /* ── Wrapper ──────────────────────────────────────────────── */
 .contact-wrapper {
   display: grid;

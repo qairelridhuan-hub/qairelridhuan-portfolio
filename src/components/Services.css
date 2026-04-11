@@ -1,107 +1,128 @@
-/* ── Section wrapper ──────────────────────────────────────── */
+/* ── Section ──────────────────────────────────────────────── */
 #services {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
   padding-top: 0;
   padding-bottom: 0;
-  display: block !important;
-  min-height: unset !important;
-  justify-content: unset !important;
 }
 
-.svc-header {
-  margin-bottom: 8px;
+/* ── Two-column layout ────────────────────────────────────── */
+.svc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ── Left column ──────────────────────────────────────────── */
+.svc-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.svc-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
 }
 
 .svc-heading {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   color: var(--text);
-  margin-bottom: 10px;
-}
-
-.svc-subheading {
-  font-size: 0.92rem;
-  color: var(--muted);
-  margin-bottom: 16px;
+  line-height: 1.15;
 }
 
 .svc-subdesc {
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.3);
-  line-height: 1.75;
-  max-width: 580px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.8;
+  max-width: 400px;
 }
 
-/* ── Scroll driver — tall enough to scroll through 4 cards ── */
-.svc-scroll-wrapper {
-  height: 280vh;
-  position: relative;
-}
-
-/* ── Sticky viewport ──────────────────────────────────────── */
-.svc-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 80px;
-  overflow: hidden;
-}
-
-/* ── Stack container ──────────────────────────────────────── */
-.svc-stack {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  height: 320px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* ── Individual card ──────────────────────────────────────── */
-.svc-card {
-  position: absolute;
-  inset: 0;
-  background: #ffffff;
-  border-radius: 24px;
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  overflow: hidden;
-  will-change: transform, opacity, filter;
-  cursor: default;
-  transform-origin: center bottom;
-}
-
-/* ── Left text ────────────────────────────────────────────── */
-.svc-left {
-  padding: 44px 48px;
+.svc-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 12px;
+  margin-top: 4px;
 }
 
-.svc-number {
-  font-size: 0.7rem;
+.svc-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+}
+
+.svc-list-item i {
+  font-size: 0.9rem;
+  width: 18px;
+  text-align: center;
+}
+
+/* ── Right column ─────────────────────────────────────────── */
+.svc-right-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+/* ── Card inner ───────────────────────────────────────────── */
+.svc-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background: #0d0d0f;
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px;
+}
+
+.svc-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.svc-card-num {
+  font-size: 0.68rem;
   font-weight: 700;
-  color: #bbb;
+  color: rgba(255,255,255,0.2);
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.svc-title {
-  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
-  font-weight: 800;
-  color: #111;
-  line-height: 1.2;
+.svc-card-icon {
+  font-size: 1.1rem;
 }
 
-.svc-desc {
-  font-size: 0.85rem;
-  color: #666;
+.svc-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.svc-card-desc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.38);
   line-height: 1.75;
-  max-width: 440px;
+  flex: 1;
+  margin-bottom: 20px;
 }
 
 .svc-tags {
@@ -110,53 +131,30 @@
   gap: 6px;
 }
 
-.svc-tags span {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #444;
-  background: #f2f2f2;
+.svc-tag {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 20px;
-  padding: 4px 12px;
+  padding: 3px 10px;
 }
 
-/* ── Right visual ─────────────────────────────────────────── */
-.svc-right {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.svc-icon-wrap {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  display: grid;
-  place-items: center;
-  font-size: 2.4rem;
-  position: relative;
-  z-index: 1;
-  backdrop-filter: blur(10px);
-}
-
-.svc-glow {
+.svc-card-glow {
   position: absolute;
-  inset: -30%;
+  inset: -20%;
   pointer-events: none;
   z-index: 0;
 }
 
-/* ── After scroll wrapper — give breathing room ───────────── */
-
 /* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .svc-scroll-wrapper { height: 450vh; }
-  .svc-stack { height: 420px; }
-  .svc-card {
+@media (max-width: 900px) {
+  .svc-layout {
     grid-template-columns: 1fr;
+    gap: 48px;
   }
-  .svc-right { min-height: 140px; }
-  .svc-left { padding: 28px 24px; }
+  .svc-right-col {
+    padding: 20px 0 60px;
+  }
 }

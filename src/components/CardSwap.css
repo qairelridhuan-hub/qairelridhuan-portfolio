@@ -1,0 +1,13 @@
+.card-swap-container {
+  position: relative;
+  perspective: 900px;
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  transform-origin: center bottom;
+  will-change: transform, opacity;
+}
