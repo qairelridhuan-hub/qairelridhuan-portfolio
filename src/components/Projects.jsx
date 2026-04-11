@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import useFadeIn from '../hooks/useFadeIn'
 import './Projects.css'
+import CircularGallery from './CircularGallery'
 
 const projects = [
   {
@@ -92,45 +93,27 @@ function ProjectModal({ project, onClose }) {
   )
 }
 
-function ProjectCard({ project, onOpen }) {
-  const ref = useFadeIn()
-  return (
-    <div className="proj-card fade-in" ref={ref} onClick={() => onOpen(project)}>
-      {/* gradient strip */}
-      <div className="proj-bg" style={{ background: project.gradient }} />
-
-      {/* category label over strip */}
-      <div className="proj-content">
-        <span className="proj-category">{project.category}</span>
-      </div>
-
-      {/* body */}
-      <div className="proj-body">
-        <h3 className="proj-title">{project.title}</h3>
-        <div className="proj-stack">
-          {project.stack.map(s => <span key={s}>{s}</span>)}
-        </div>
-        <div className="proj-bottom-row">
-          <button className="proj-arrow" onClick={e => { e.stopPropagation(); onOpen(project) }}>
-            <i className="fas fa-arrow-up-right-from-square"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export default function Projects() {
   const [selected, setSelected] = useState(null)
+
+  const projectItems = projects.map((p, i) => ({
+    image: `https://picsum.photos/seed/${i + 25}/800/600?grayscale`,
+    text: p.title
+  }));
+
   return (
     <section id="projects">
       <div className="container">
         <div className="glass-panel">
           <h2 className="section-title">Projects</h2>
-          <div className="proj-grid">
-            {projects.map((p, i) => (
-              <ProjectCard key={i} project={p} onOpen={setSelected} />
-            ))}
+          <div style={{ height: '600px', position: 'relative' }}>
+            <CircularGallery 
+              bend={0} 
+              textColor="#ffffff" 
+              borderRadius={0.05} 
+              scrollEase={0.05}
+              scrollSpeed={2}
+            />
           </div>
         </div>
       </div>
