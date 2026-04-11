@@ -104,17 +104,17 @@ export default function Projects() {
   return (
     <section id="projects">
       <div className="container">
-        <div className="glass-panel">
-          <h2 className="section-title">Projects</h2>
-          <div style={{ height: '600px', position: 'relative' }}>
-            <CircularGallery 
-              bend={0} 
-              textColor="#ffffff" 
-              borderRadius={0.05} 
-              scrollEase={0.05}
-              scrollSpeed={2}
-            />
-          </div>
+        <h2 className="section-title">Projects</h2>
+        <div style={{ height: '600px', position: 'relative' }}>
+          <CircularGallery 
+            items={projectItems}
+            bend={0} 
+            textColor="#ffffff" 
+            borderRadius={0.05} 
+            scrollEase={0.05}
+            scrollSpeed={2}
+            onItemClick={(idx) => setSelected(projects[idx])}
+          />
         </div>
       </div>
       {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
