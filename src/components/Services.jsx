@@ -1,4 +1,5 @@
 import CardSwap, { Card } from './CardSwap'
+import Threads from './Threads'
 import './Services.css'
 
 const services = [
@@ -38,7 +39,10 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services">
+    <section id="services" className="aurora-section">
+      <div className="aurora-bg">
+        <Threads amplitude={1} distance={0} enableMouseInteraction color={[1, 1, 1]} />
+      </div>
       <div className="container">
         <div className="svc-layout">
           {/* Left — description */}

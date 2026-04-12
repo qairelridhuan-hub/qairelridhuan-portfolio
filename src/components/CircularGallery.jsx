@@ -352,7 +352,7 @@ class App {
       { image: `https://picsum.photos/seed/12/800/600?grayscale`, text: 'Palm Trees' }
     ];
     this.originalItems = items && items.length ? items : defaultItems;
-    this.mediasImages = this.originalItems.concat(this.originalItems);
+    this.mediasImages = this.originalItems;
     this.medias = this.mediasImages.map((data, index) => {
       return new Media({
         geometry: this.planeGeometry,
@@ -375,6 +375,7 @@ class App {
   onTouchDown(e) {
     this.isDown = true;
     this.dragged = false;
+    this.downOnContainer = true;
     this.scroll.position = this.scroll.current;
     this.start = e.touches ? e.touches[0].clientX : e.clientX;
   }
@@ -388,14 +389,15 @@ class App {
   onTouchUp() {
     this.isDown = false;
     this.onCheck();
-    if (!this.dragged && this.onItemClick) {
-      if (!this.medias || !this.medias[0]) return;
-      const width = this.medias[0].width;
-      const itemIndex = Math.round(Math.abs(this.scroll.target) / width);
-      const rawIndex = itemIndex % this.mediasImages.length;
-      const origIndex = rawIndex % this.originalItems.length;
-      this.onItemClick(origIndex);
+    if (!this.dragged && this.downOnContainer && this.onItemClick) {
+      if (this.medias && this.medias[0]) {
+        const width = this.medias[0].width;
+        const itemIndex = Math.round(Math.abs(this.scroll.target) / width);
+        const origIndex = itemIndex % this.originalItems.length;
+        this.onItemClick(origIndex);
+      }
     }
+    this.downOnContainer = false;
   }
   onWheel(e) {
     const delta = e.deltaY || e.wheelDelta || e.detail;

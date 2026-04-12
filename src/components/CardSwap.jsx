@@ -2,25 +2,18 @@ import {
   forwardRef,
   useRef,
   useEffect,
-  useImperativeHandle,
   cloneElement,
   Children,
 } from 'react'
 import gsap from 'gsap'
 import './CardSwap.css'
 
-export const Card = forwardRef(({ children, style, className = '' }, ref) => {
-  return (
-    <div ref={ref} className={`card ${className}`} style={style}>
-      {children}
-    </div>
-  )
-})
+export const Card = forwardRef(({ children, style, className = '' }, ref) => (
+  <div ref={ref} className={`card ${className}`} style={style}>
+    {children}
+  </div>
+))
 Card.displayName = 'Card'
-
-function makeSlots(count) {
-  return Array.from({ length: count }, (_, i) => i)
-}
 
 export default function CardSwap({
   children,
@@ -32,82 +25,90 @@ export default function CardSwap({
   height = 300,
   easing = 'elastic.out(0.6,0.9)',
 }) {
-  const refs = useRef([])
   const containerRef = useRef(null)
-  const tlRef = useRef(null)
+  const refsArr = useRef([])
   const intervalRef = useRef(null)
-  const slotsRef = useRef(makeSlots(Children.count(children)))
+  // slotsRef[i] = which slot card i occupies. slot count-1 = front, 0 = back.
+  const slotsRef = useRef([])
 
   const childArray = Children.toArray(children)
   const count = childArray.length
 
-  refs.current = Array.from({ length: count }, (_, i) => refs.current[i] || { current: null })
+  // Ensure refs array is sized
+  refsArr.current = Array.from({ length: count }, (_, i) => refsArr.current[i] || { current: null })
 
-  function getSlotStyle(slot, total, cDist, vDist) {
-    const offset = total - 1 - slot
+  function getSlotStyle(slot) {
+    const offset = count - 1 - slot   // 0 = front, increases toward back
     return {
-      x: offset * -cDist,
-      y: offset * vDist,
+      x: offset * -cardDistance,
+      y: offset * verticalDistance,
       scale: 1 - offset * 0.06,
       zIndex: slot,
     }
   }
 
-  function animateToSlot(el, slot, total, cDist, vDist) {
-    const { x, y, scale, zIndex } = getSlotStyle(slot, total, cDist, vDist)
-    gsap.to(el, {
-      x,
-      y,
-      scale,
-      zIndex,
-      duration: 0.8,
-      ease: easing,
-    })
+  function animateToSlot(el, slot) {
+    const { x, y, scale, zIndex } = getSlotStyle(slot)
+    gsap.to(el, { x, y, scale, zIndex, duration: 0.75, ease: easing })
   }
 
   function cycle() {
     const slots = slotsRef.current
-    const top = slots.indexOf(count - 1)
-    const topEl = refs.current[top]?.current
-    if (!topEl) return
+    // Find front card (slot = count-1)
+    const frontIdx = slots.indexOf(count - 1)
+    const frontEl = refsArr.current[frontIdx]?.current
+    if (!frontEl) return
 
-    const tl = gsap.timeline()
-    tlRef.current = tl
-
-    tl.to(topEl, {
-      x: '+=120',
-      y: '-=30',
-      rotation: 8,
+    // Fly front card out
+    gsap.to(frontEl, {
+      x: '+=140',
+      y: '-=20',
+      rotation: 7,
       opacity: 0,
-      duration: 0.35,
+      duration: 0.38,
       ease: 'power2.in',
       onComplete: () => {
-        gsap.set(topEl, { x: -200, y: 80, rotation: -6, opacity: 0, zIndex: 0 })
-        const newSlots = slots.map(s => (s === 0 ? count - 1 : s - 1))
-        newSlots[top] = 0
+        // New slots: front card → slot 0 (back); everyone else +1 (move toward front)
+        const newSlots = slots.map((s, i) => i === frontIdx ? 0 : s + 1)
         slotsRef.current = newSlots
-        refs.current.forEach((r, i) => {
-          if (r.current) animateToSlot(r.current, newSlots[i], count, cardDistance, verticalDistance)
+
+        // Snap front card to back position (off-screen left)
+        const backStyle = getSlotStyle(0)
+        gsap.set(frontEl, { ...backStyle, rotation: 0, opacity: 0 })
+
+        // Animate all cards to their new slot positions
+        refsArr.current.forEach((r, i) => {
+          if (r.current && i !== frontIdx) animateToSlot(r.current, newSlots[i])
         })
-        gsap.to(topEl, { opacity: 1, duration: 0.4, ease: 'power2.out' })
+
+        // Fade front card back in at the back
+        gsap.to(frontEl, { opacity: 1, duration: 0.35, delay: 0.15 })
       },
     })
   }
 
   useEffect(() => {
-    const slots = slotsRef.current
-    refs.current.forEach((r, i) => {
+    // Initial slots: card 0 → front (slot count-1), card 1 → count-2, ..., card count-1 → 0 (back)
+    // So order on screen front→back: card0, card1, card2, card3
+    const initialSlots = Array.from({ length: count }, (_, i) => count - 1 - i)
+    slotsRef.current = initialSlots
+
+    refsArr.current.forEach((r, i) => {
       if (!r.current) return
-      const { x, y, scale, zIndex } = getSlotStyle(slots[i], count, cardDistance, verticalDistance)
-      gsap.set(r.current, { x, y, scale, zIndex, opacity: 1 })
+      const { x, y, scale, zIndex } = getSlotStyle(initialSlots[i])
+      gsap.set(r.current, { x, y, scale, zIndex, opacity: 1, rotation: 0 })
     })
 
-    intervalRef.current = setInterval(cycle, delay)
+    function startInterval() {
+      intervalRef.current = setInterval(cycle, delay)
+    }
+
+    startInterval()
 
     if (pauseOnHover && containerRef.current) {
       const el = containerRef.current
       const pause = () => clearInterval(intervalRef.current)
-      const resume = () => { intervalRef.current = setInterval(cycle, delay) }
+      const resume = () => startInterval()
       el.addEventListener('mouseenter', pause)
       el.addEventListener('mouseleave', resume)
       return () => {
@@ -127,7 +128,10 @@ export default function CardSwap({
       style={{ width, height }}
     >
       {childArray.map((child, i) =>
-        cloneElement(child, { ref: el => { refs.current[i] = { current: el } } })
+        cloneElement(child, {
+          key: i,
+          ref: el => { refsArr.current[i] = { current: el } },
+        })
       )}
     </div>
   )
