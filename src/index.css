@@ -20,6 +20,9 @@
 
 html {
   font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
 }
 
 body {
@@ -28,6 +31,7 @@ body {
   color: var(--text);
   line-height: 1.7;
   overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 a { text-decoration: none; color: inherit; }

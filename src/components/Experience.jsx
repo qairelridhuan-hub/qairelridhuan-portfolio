@@ -1,5 +1,4 @@
 import useScrollReveal from '../hooks/useScrollReveal'
-import Threads from './Threads'
 import './Experience.css'
 
 const jobs = [
@@ -101,9 +100,6 @@ function ExpCard({ job }) {
 export default function Experience() {
   return (
     <section id="experience" className="aurora-section">
-      <div className="aurora-bg">
-        <Threads amplitude={1} distance={0} enableMouseInteraction color={[1, 1, 1]} />
-      </div>
       <div className="container">
         <h2 className="section-title">Working Experience</h2>
         <div className="exp-timeline">

@@ -1,4 +1,3 @@
-import Threads from './Threads'
 import DomeGallery from './DomeGallery'
 import './Skills.css'
 
@@ -34,9 +33,6 @@ const galleryItems = skills.map(s => ({ src: '', alt: s.label, label: s.label, l
 export default function Skills() {
   return (
     <section id="skills" className="aurora-section">
-      <div className="aurora-bg">
-        <Threads amplitude={1} distance={0} enableMouseInteraction color={[1, 1, 1]} />
-      </div>
       <div className="container">
         <h2 className="section-title">Technical Skills</h2>
         <p className="skills-hint">Drag to explore all skills</p>

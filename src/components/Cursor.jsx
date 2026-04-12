@@ -17,8 +17,8 @@ export default function Cursor() {
     }
 
     const loop = () => {
-      glow.current.x += (pos.current.x - glow.current.x) * 0.08
-      glow.current.y += (pos.current.y - glow.current.y) * 0.08
+      glow.current.x += (pos.current.x - glow.current.x) * 0.14
+      glow.current.y += (pos.current.y - glow.current.y) * 0.14
       if (glowRef.current) {
         glowRef.current.style.transform = `translate(${glow.current.x}px, ${glow.current.y}px)`
       }

@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.jsx'
 
 // Smooth scroll
-const lenis = new Lenis({ lerp: 0.08, smoothWheel: true })
+const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, wheelMultiplier: 1.2, touchMultiplier: 1.8 })
 function raf(time) {
   lenis.raf(time)
   requestAnimationFrame(raf)
