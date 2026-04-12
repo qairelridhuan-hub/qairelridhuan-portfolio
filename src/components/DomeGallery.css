@@ -1,0 +1,376 @@
+.sphere-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  --radius: 520px;
+  --viewer-pad: 72px;
+  --circ: calc(var(--radius) * 3.14);
+  --rot-y: calc((360deg / var(--segments-x)) / 2);
+  --rot-x: calc((360deg / var(--segments-y)) / 2);
+  --item-width: calc(var(--circ) / var(--segments-x));
+  --item-height: calc(var(--circ) / var(--segments-y));
+}
+.sphere-root * { box-sizing: border-box; }
+.sphere, .item, .item__image { transform-style: preserve-3d; }
+
+main.sphere-main {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  background: transparent;
+}
+
+.stage {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  perspective: calc(var(--radius) * 2);
+  perspective-origin: 50% 50%;
+  contain: layout paint size;
+}
+
+.sphere {
+  transform: translateZ(calc(var(--radius) * -1));
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.overlay, .overlay--blur {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  z-index: 3;
+  pointer-events: none;
+}
+.overlay {
+  background-image: radial-gradient(rgba(235,235,235,0) 65%, var(--overlay-blur-color, #060010) 100%);
+}
+.overlay--blur {
+  -webkit-mask-image: radial-gradient(rgba(235,235,235,0) 70%, var(--overlay-blur-color, #060010) 90%);
+  mask-image: radial-gradient(rgba(235,235,235,0) 70%, var(--overlay-blur-color, #060010) 90%);
+  backdrop-filter: blur(3px);
+}
+
+.item {
+  width: calc(var(--item-width) * var(--item-size-x));
+  height: calc(var(--item-height) * var(--item-size-y));
+  position: absolute;
+  top: -999px; bottom: -999px; left: -999px; right: -999px;
+  margin: auto;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  transition: transform 300ms;
+  transform:
+    rotateY(calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2)) + var(--rot-y-delta, 0deg)))
+    rotateX(calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2)) + var(--rot-x-delta, 0deg)))
+    translateZ(var(--radius));
+}
+
+.item__image {
+  position: absolute;
+  display: block;
+  inset: 8px;
+  border-radius: var(--tile-radius, 16px);
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  overflow: hidden;
+  backface-visibility: hidden;
+  transition: transform 300ms, box-shadow 0.2s;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  pointer-events: auto;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+.item__image:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+  transform: scale(1.03);
+}
+
+.item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  backface-visibility: hidden;
+  filter: var(--image-filter, none);
+}
+
+/* Skill tile (no image) */
+.item__skill-tile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px 0;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.skill-tile-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 6px;
+}
+
+.skill-tile-logo-wrap {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.04);
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.skill-tile-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.item__skill-tile i {
+  font-size: 2rem;
+  color: #222;
+}
+
+.skill-tile-pct {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #555;
+}
+
+.skill-tile-bottom {
+  padding-bottom: 0;
+}
+
+.skill-tile-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.skill-tile-cat {
+  font-size: 0.52rem;
+  font-weight: 600;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+  text-align: center;
+}
+
+.skill-tile-bar {
+  height: 3px;
+  background: rgba(0,0,0,0.08);
+  margin: 6px -12px 0;
+  flex-shrink: 0;
+}
+
+.skill-tile-bar-fill {
+  height: 100%;
+  background: #333;
+  border-radius: 0;
+}
+
+.viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--viewer-pad);
+}
+.viewer .frame {
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--enlarge-radius, 32px);
+  display: flex;
+}
+@media (max-aspect-ratio: 1/1) {
+  .viewer .frame { height: auto; width: 100%; }
+}
+.viewer .scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(0,0,0,0.4);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  backdrop-filter: blur(3px);
+}
+.sphere-root[data-enlarging='true'] .viewer .scrim {
+  opacity: 1;
+  pointer-events: all;
+}
+.viewer .enlarge {
+  position: absolute;
+  z-index: 30;
+  border-radius: var(--enlarge-radius, 32px);
+  overflow: hidden;
+  transition: transform 500ms ease, opacity 500ms ease;
+  transform-origin: top left;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+.viewer .enlarge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: var(--image-filter, none);
+}
+.sphere-root .enlarge-closing img { filter: var(--image-filter, none); }
+
+.edge-fade {
+  position: absolute;
+  left: 0; right: 0;
+  height: 120px;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--overlay-blur-color, #060010));
+}
+.edge-fade--top { top: 0; transform: rotate(180deg); }
+.edge-fade--bottom { bottom: 0; }
+
+.dg-scroll-lock { overflow: hidden; }
+
+/* ── Skill Modal ───────────────────────────────────────────────────── */
+.skill-modal-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sm-fade-in 0.2s ease;
+}
+
+@keyframes sm-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.skill-modal {
+  position: relative;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  width: min(340px, 88vw);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  animation: sm-slide-up 0.22s ease;
+}
+
+@keyframes sm-slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.skill-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  color: #aaa;
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1;
+}
+.skill-modal-close:hover { color: #333; }
+
+.skill-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.skill-modal-logo-wrap {
+  width: 52px;
+  height: 52px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 8px;
+}
+
+.skill-modal-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.skill-modal-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.skill-modal-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #111;
+  line-height: 1;
+}
+
+.skill-modal-cat {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.skill-modal-pct {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #111;
+  flex-shrink: 0;
+}
+
+.skill-modal-bar-track {
+  height: 4px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 2px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.skill-modal-bar-fill {
+  height: 100%;
+  background: #111;
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.skill-modal-desc {
+  font-size: 0.82rem;
+  color: #444;
+  line-height: 1.65;
+  margin: 0;
+}

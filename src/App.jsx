@@ -11,7 +11,6 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Cursor from './components/Cursor'
 import BackToTop from './components/BackToTop'
-import ScrollProgress from './components/ScrollProgress'
 import Loader from './components/Loader'
 import './App.css'
 
@@ -22,7 +21,6 @@ export default function App() {
     <>
       {!loaded && <Loader onDone={() => setLoaded(true)} />}
       <Cursor />
-      <ScrollProgress />
       <Navbar />
       <Hero />
       <About />

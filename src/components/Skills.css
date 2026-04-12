@@ -1,3 +1,28 @@
+/* ── Section ─────────────────────────────────────────────────────── */
+#skills {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 80px;
+  padding-bottom: 0;
+}
+
+.skills-hint {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  margin-top: 6px;
+}
+
+/* ── Dome wrap ───────────────────────────────────────────────────── */
+.skills-dome-wrap {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  margin-top: 8px;
+}
+
 /* ── Tools Grid ─────────────────────────────────────────────────── */
 .tools-grid {
   display: grid;
