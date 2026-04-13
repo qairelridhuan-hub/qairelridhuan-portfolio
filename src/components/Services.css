@@ -152,9 +152,14 @@
 @media (max-width: 900px) {
   .svc-layout {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
   .svc-right-col {
-    padding: 20px 0 60px;
+    padding: 0 0 40px;
   }
+}
+
+@media (max-width: 600px) {
+  .svc-heading { font-size: 1.8rem; }
+  .svc-card-inner { padding: 24px 20px; }
 }

@@ -23,6 +23,15 @@
   margin-top: 8px;
 }
 
+@media (max-width: 600px) {
+  .skills-dome-wrap {
+    height: 420px;
+  }
+  #skills {
+    padding-top: 60px;
+  }
+}
+
 /* ── Tools Grid ─────────────────────────────────────────────────── */
 .tools-grid {
   display: grid;
