@@ -300,8 +300,14 @@ export default function DomeGallery({
   }, [enlargeTransitionMs, lockScroll, segments, unlockScroll]);
 
   const onTileClick = useCallback(e => {
+    const now = performance.now();
+    // Safety reset — if enough time has passed, a stuck movedRef/draggingRef shouldn't block clicks
+    if (now - lastDragEndAt.current > 300) {
+      draggingRef.current = false;
+      movedRef.current = false;
+    }
     if (draggingRef.current || movedRef.current) return;
-    if (performance.now() - lastDragEndAt.current < 80) return;
+    if (now - lastDragEndAt.current < 150) return;
     if (openingRef.current) return;
     const item = e.currentTarget.closest('.item');
     const hasSrc = item?.dataset?.src;
