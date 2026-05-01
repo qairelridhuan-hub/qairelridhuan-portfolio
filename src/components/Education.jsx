@@ -56,7 +56,7 @@ export default function Education() {
             <div
               key={i}
               className={`edu-card ${item.current ? 'edu-card--current' : ''}`}
-              style={{ top: `${80 + i * 24}px` }}
+              style={{ top: `${80 + i * 32}px` }}
             >
               <div className="edu-card-top">
                 <div className="edu-logo-wrap">
