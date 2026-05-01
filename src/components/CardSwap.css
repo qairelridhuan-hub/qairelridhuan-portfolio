@@ -1,6 +1,12 @@
 .card-swap-container {
   position: relative;
   perspective: 900px;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.card-swap-container:active {
+  cursor: grabbing;
 }
 
 .card {

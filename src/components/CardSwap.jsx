@@ -28,17 +28,17 @@ export default function CardSwap({
   const containerRef = useRef(null)
   const refsArr = useRef([])
   const intervalRef = useRef(null)
-  // slotsRef[i] = which slot card i occupies. slot count-1 = front, 0 = back.
   const slotsRef = useRef([])
+  const dragRef = useRef({ active: false, startX: 0, startY: 0, dragging: false })
+  const cyclingRef = useRef(false)
 
   const childArray = Children.toArray(children)
   const count = childArray.length
 
-  // Ensure refs array is sized
   refsArr.current = Array.from({ length: count }, (_, i) => refsArr.current[i] || { current: null })
 
   function getSlotStyle(slot) {
-    const offset = count - 1 - slot   // 0 = front, increases toward back
+    const offset = count - 1 - slot
     return {
       x: offset * -cardDistance,
       y: offset * verticalDistance,
@@ -53,13 +53,13 @@ export default function CardSwap({
   }
 
   function cycle() {
+    if (cyclingRef.current) return
+    cyclingRef.current = true
     const slots = slotsRef.current
-    // Find front card (slot = count-1)
     const frontIdx = slots.indexOf(count - 1)
     const frontEl = refsArr.current[frontIdx]?.current
-    if (!frontEl) return
+    if (!frontEl) { cyclingRef.current = false; return }
 
-    // Fly front card out
     gsap.to(frontEl, {
       x: '+=140',
       y: '-=20',
@@ -68,28 +68,30 @@ export default function CardSwap({
       duration: 0.38,
       ease: 'power2.in',
       onComplete: () => {
-        // New slots: front card → slot 0 (back); everyone else +1 (move toward front)
         const newSlots = slots.map((s, i) => i === frontIdx ? 0 : s + 1)
         slotsRef.current = newSlots
 
-        // Snap front card to back position (off-screen left)
         const backStyle = getSlotStyle(0)
         gsap.set(frontEl, { ...backStyle, rotation: 0, opacity: 0 })
 
-        // Animate all cards to their new slot positions
         refsArr.current.forEach((r, i) => {
           if (r.current && i !== frontIdx) animateToSlot(r.current, newSlots[i])
         })
 
-        // Fade front card back in at the back
-        gsap.to(frontEl, { opacity: 1, duration: 0.35, delay: 0.15 })
+        gsap.to(frontEl, {
+          opacity: 1, duration: 0.35, delay: 0.15,
+          onComplete: () => { cyclingRef.current = false }
+        })
       },
     })
   }
 
+  function restartInterval() {
+    clearInterval(intervalRef.current)
+    intervalRef.current = setInterval(cycle, delay)
+  }
+
   useEffect(() => {
-    // Initial slots: card 0 → front (slot count-1), card 1 → count-2, ..., card count-1 → 0 (back)
-    // So order on screen front→back: card0, card1, card2, card3
     const initialSlots = Array.from({ length: count }, (_, i) => count - 1 - i)
     slotsRef.current = initialSlots
 
@@ -99,33 +101,89 @@ export default function CardSwap({
       gsap.set(r.current, { x, y, scale, zIndex, opacity: 1, rotation: 0 })
     })
 
-    function startInterval() {
-      intervalRef.current = setInterval(cycle, delay)
-    }
+    restartInterval()
 
-    startInterval()
+    const el = containerRef.current
+    if (!el) return
 
-    if (pauseOnHover && containerRef.current) {
-      const el = containerRef.current
+    const handlers = []
+
+    if (pauseOnHover) {
       const pause = () => clearInterval(intervalRef.current)
-      const resume = () => startInterval()
+      const resume = () => restartInterval()
       el.addEventListener('mouseenter', pause)
       el.addEventListener('mouseleave', resume)
-      return () => {
-        clearInterval(intervalRef.current)
-        el.removeEventListener('mouseenter', pause)
-        el.removeEventListener('mouseleave', resume)
+      handlers.push(['mouseenter', pause], ['mouseleave', resume])
+    }
+
+    // ── Drag / swipe ──────────────────────────────────────────
+    const onPointerDown = e => {
+      dragRef.current = { active: true, startX: e.clientX, startY: e.clientY, dragging: false }
+      clearInterval(intervalRef.current)
+    }
+
+    const onPointerMove = e => {
+      if (!dragRef.current.active) return
+      const dx = e.clientX - dragRef.current.startX
+      const dy = e.clientY - dragRef.current.startY
+      if (!dragRef.current.dragging && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+        dragRef.current.dragging = true
+      }
+      if (!dragRef.current.dragging) return
+
+      // Follow the front card with the pointer
+      const slots = slotsRef.current
+      const frontIdx = slots.indexOf(count - 1)
+      const frontEl = refsArr.current[frontIdx]?.current
+      if (frontEl && !cyclingRef.current) {
+        const base = getSlotStyle(count - 1)
+        gsap.set(frontEl, {
+          x: base.x + dx,
+          y: base.y + (dy * 0.2),
+          rotation: dx * 0.05,
+        })
       }
     }
 
-    return () => clearInterval(intervalRef.current)
+    const onPointerUp = e => {
+      if (!dragRef.current.active) return
+      const dx = e.clientX - dragRef.current.startX
+      dragRef.current.active = false
+
+      const slots = slotsRef.current
+      const frontIdx = slots.indexOf(count - 1)
+      const frontEl = refsArr.current[frontIdx]?.current
+
+      if (Math.abs(dx) > 80 && !cyclingRef.current) {
+        // Swipe threshold met — cycle
+        cycle()
+      } else if (frontEl && !cyclingRef.current) {
+        // Snap back
+        const base = getSlotStyle(count - 1)
+        gsap.to(frontEl, { x: base.x, y: base.y, rotation: 0, duration: 0.4, ease: 'back.out(1.5)' })
+      }
+
+      restartInterval()
+    }
+
+    el.addEventListener('pointerdown', onPointerDown)
+    window.addEventListener('pointermove', onPointerMove)
+    window.addEventListener('pointerup', onPointerUp)
+
+    return () => {
+      clearInterval(intervalRef.current)
+      handlers.forEach(([evt, fn]) => el.removeEventListener(evt, fn))
+      el.removeEventListener('pointerdown', onPointerDown)
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointerup', onPointerUp)
+    }
   }, [count, cardDistance, verticalDistance, delay, pauseOnHover])
 
   return (
     <div
       ref={containerRef}
       className="card-swap-container"
-      style={{ width, height }}
+      style={{ width, height, cursor: 'grab' }}
     >
       {childArray.map((child, i) =>
         cloneElement(child, {
