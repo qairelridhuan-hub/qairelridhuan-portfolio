@@ -35,6 +35,7 @@ export default function Skills() {
     <section id="skills" className="aurora-section">
       <div className="container">
         <h2 className="section-title">Technical Skills</h2>
+        <p className="skills-subtitle">A collection of languages, frameworks, and tools I've worked with — from building full-stack web apps to mobile development and beyond.</p>
         <p className="skills-hint">Drag to explore all skills</p>
       </div>
       <div className="skills-dome-wrap">
