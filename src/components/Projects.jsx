@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Threads from './Threads'
 import './Projects.css'
 
 const projects = [
@@ -115,13 +116,16 @@ export default function Projects() {
   const [selected, setSelected] = useState(null)
 
   return (
-    <section id="projects">
-      <div className="container">
+    <section id="projects" style={{ position: 'relative' }}>
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        <Threads amplitude={1} distance={0} enableMouseInteraction color={[1, 1, 1]} />
+      </div>
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 className="section-title">Projects</h2>
         <p className="proj-hint">Click any card to view details</p>
       </div>
 
-      <div className="proj-scroll-outer">
+      <div className="proj-scroll-outer" style={{ position: 'relative', zIndex: 1 }}>
         <div className="proj-track">
           {projects.map((p, i) => (
             <div

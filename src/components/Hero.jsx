@@ -64,7 +64,7 @@ export default function Hero() {
           </div>
 
           <p className="hero-desc">
-            Building real-time apps that help people manage their finances and work — combining software development with IT support expertise.
+            Software Engineering student by day, full stack developer by service. I design and build modern web and mobile apps — from UI to backend — and offer end-to-end development services for individuals and businesses.
           </p>
 
           <div className="hero-cta">
