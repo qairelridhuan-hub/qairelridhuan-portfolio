@@ -79,7 +79,7 @@ function CertsCarousel() {
   const certsData = [
     {
       id: 1,
-      img: '/images/vibe2026.jpg',
+      img: '/images/vibe2026.png',
       accent: '#ff9900',
       badgeIcon: 'fas fa-trophy',
     },
@@ -94,7 +94,7 @@ function CertsCarousel() {
   const carouselItems = [
     {
       id: 1,
-      icon: <CertIcon img="/images/vibe2026.jpg" label="VIBE 2026" onOpen={() => setLightbox({ ...certsData[0], img: '/images/vibe2026.jpg' })} />,
+      icon: <CertIcon img="/images/vibe2026.png" label="VIBE 2026" onOpen={() => setLightbox({ ...certsData[0], img: '/images/vibe2026.png' })} />,
       custom: <AchievementContent
         accent="#ff9900"
         place="🏆 1st Place"
@@ -114,7 +114,7 @@ function CertsCarousel() {
     },
     {
       id: 2,
-      icon: <CertIcon img={certsData[1].img} label="Gold Medal" onOpen={() => setLightbox(certsData[1])} />,
+      icon: <CertIcon img="/images/fyp.png" label="Gold Medal" onOpen={() => setLightbox({ ...certsData[1], img: '/images/fyp.png' })} />,
       custom: <AchievementContent
         accent="#f59e0b"
         place="🥇 Gold Medal"
