@@ -4,17 +4,16 @@ import './Experience.css'
 const jobs = [
   {
     year: '2023',
-    dotLogo: '/images/Aptiv.webp',
+    dotLogo: '/images/versigent_logo.jpeg',
     tag: 'IT · Internship',
-    title: 'IT Coordinator (Intern)',
-    company: 'Aptiv (Malaysia) Sdn Bhd',
-    date: '30 July 2023 – 11 January 2024',
-    desc: 'Resolved diverse PC issues including slow RAM, motherboard diagnostics, and drive upgrades. Deployed antivirus software on Windows manufacturing PCs and managed network cable installations across multiple factory departments.',
-    images: ['/images/exp-aptiv1.jpg', '/images/exp-aptiv2.jpg'],
+    title: 'IT Analyst Intern',
+    company: 'Versigent',
+    date: 'Jul 2023 – Jan 2024 · 7 mos · Kuala Terengganu, Terengganu, Malaysia · On-site',
+    desc: 'Delivered IT support during internship training by diagnosing and resolving hardware issues, including RAM performance optimization, motherboard troubleshooting, and storage upgrades.',
+    images: ['/images/exp-aptiv1.jpg'],
     points: [
-      'Resolved diverse PC issues including slow RAM, motherboard diagnostics, and drive upgrades.',
-      'Deployed antivirus software on Windows manufacturing PCs using command-line tools.',
-      'Managed network cable installations across multiple factory departments and sections.',
+      'Delivered IT support during internship training by diagnosing and resolving hardware issues.',
+      'Performed RAM performance optimization, motherboard troubleshooting, and storage upgrades.',
     ],
   },
 ]

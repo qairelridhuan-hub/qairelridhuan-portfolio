@@ -290,6 +290,22 @@
   background: rgba(255,255,255,.1) !important;
 }
 
+/* ── View Cert Button ─────────────────────────────────────── */
+.ach-view-cert-btn {
+  margin-top: 10px;
+  padding: 3px 0;
+  width: 120px;
+  text-align: center;
+  border-radius: 999px;
+  border: 1px solid #fff;
+  background: #fff;
+  color: #000 !important;
+  font-size: .68rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.ach-view-cert-btn:hover { opacity: 0.7; }
+
 /* ── Lightbox ──────────────────────────────────────────────── */
 .ach-lightbox {
   position: fixed;

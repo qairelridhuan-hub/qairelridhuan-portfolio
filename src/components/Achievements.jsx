@@ -53,7 +53,7 @@ function CertIcon({ img, label, onOpen }) {
   )
 }
 
-function AchievementContent({ accent, place, event, date, organizer, project, highlights, stack }) {
+function AchievementContent({ accent, place, event, date, organizer, project, highlights, stack, onViewCert }) {
   return (
     <div className="ach-ci">
       <div className="ach-ci-top">
@@ -69,6 +69,11 @@ function AchievementContent({ accent, place, event, date, organizer, project, hi
       <div className="ach-ci-stack">
         {stack.map(s => <span key={s} style={{ color: accent, background: `color-mix(in srgb, ${accent} 12%, transparent)`, borderColor: `color-mix(in srgb, ${accent} 30%, transparent)` }}>{s}</span>)}
       </div>
+      {onViewCert && (
+        <button className="ach-view-cert-btn" onClick={onViewCert}>
+          View Certificate
+        </button>
+      )}
     </div>
   )
 }
@@ -110,6 +115,7 @@ function CertsCarousel() {
           'Personalized study recommendations for individual learning needs',
         ]}
         stack={['AWS Bedrock', 'RAG', 'Amazon Knowledge Base', 'AWS Cloud']}
+        onViewCert={() => window.open('/images/QAIREL QAYYUM BIN MUHAMAD RIDHUAN-AWS Generative AI Essentials-30-April-2026.pdf', '_blank')}
       />,
     },
     {
@@ -129,6 +135,7 @@ function CertsCarousel() {
           'Presented at an international-level innovation exhibition',
         ]}
         stack={['Arduino IDE', 'Pulse Sensor', 'IoT', 'LED Indicators']}
+        onViewCert={() => window.open('/images/eCERT_GOLD_-_STAGE3-114 copy.pdf', '_blank')}
       />,
     },
   ]

@@ -32,7 +32,7 @@ export default function About() {
               I'm a <strong>Software Engineering undergraduate at UTHM</strong> with hands-on experience building cross-platform mobile apps, managing IT infrastructure, and developing real-time systems. I enjoy turning complex problems into clean, practical solutions.
             </p>
             <p className="about-bio">
-              Currently building <strong>Spendly</strong> — a shift & earnings management app — as my Final Year Project using Expo, React Native, and Firebase. I also bring IT support experience from my internship at <strong>Aptiv</strong>, covering network setup, hardware maintenance, and system configuration.
+              Currently building <strong>Spendly</strong> — a shift & earnings management app — as my Final Year Project using Expo, React Native, and Firebase. I also bring IT support experience from my internship at <strong>Versigent</strong>, covering hardware diagnostics, RAM optimization, motherboard troubleshooting, and storage upgrades.
             </p>
 
             <div className="about-stats">
