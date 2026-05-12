@@ -61,6 +61,21 @@ const projects = [
   },
   {
     number: '05',
+    category: 'AI · 🏆 1st Place',
+    title: 'CampusSync',
+    brief: 'Smart Campus AI Assistant — won 1st Place at VIBE 2026 Hackathon (Amazon/AWS Academy × UTHM), April 2026.',
+    stack: ['AWS Bedrock', 'RAG', 'Amazon Knowledge Base', 'AWS Cloud'],
+    accent: '#ff9900',
+    highlights: [
+      'Won 1st Place at VIBE 2026 Hackathon hosted by Amazon/AWS Academy × UTHM',
+      'Multi-tenant university chatbot platform deployable by any university globally',
+      'Intelligent summarization of university resources and course materials',
+      'Verified university resource integration via Amazon Knowledge Base',
+      'Personalized study recommendations powered by AWS Bedrock RAG pipeline',
+    ],
+  },
+  {
+    number: '06',
     category: 'IoT · 🏅 Gold Medal',
     title: 'Smart Health Bracelet',
     brief: 'Wearable IoT prototype that detects real-time heart rate with BPM alerts — Malaysian Grand Invention Expo 2023.',

@@ -17,36 +17,6 @@ const jobs = [
       'Managed network cable installations across multiple factory departments and sections.',
     ],
   },
-  {
-    year: '2024',
-    dotLogo: '/images/baskbear.png',
-    tag: 'F&B · Part-time',
-    title: 'Barista (Bearista)',
-    company: 'Bask Bear and Coffee — KTCC Mall',
-    desc: 'Prepared a diverse range of coffee beverages and specialty drinks. Managed cash register transactions and maintained a clean, sanitized work environment.',
-    images: ['/images/exp-bask1.jpg', '/images/exp-bask2.jpg'],
-    points: [
-      'Prepared a diverse range of coffee beverages and specialty drinks.',
-      'Crafted sandwiches with attention to detail and customer preferences.',
-      'Managed cash register transactions and end-of-shift balancing.',
-      'Maintained a clean and sanitized work environment.',
-    ],
-  },
-  {
-    year: '2025',
-    dotLogo: '/images/jollygood.jpg',
-    tag: 'F&B · Part-time',
-    title: 'Barista',
-    company: 'Jolly Good Cafe, Kuala Terengganu',
-    desc: 'Prepared hot and iced beverages including specialty coffees. Managed daily operations: order taking, food prep, customer service, and accurate payment handling.',
-    images: ['/images/exp-jolly1.jpg', '/images/exp-jolly2.jpg'],
-    points: [
-      'Prepared hot and iced beverages including specialty coffees and custom orders.',
-      'Managed daily operations: order taking, food prep, and customer service.',
-      'Handled cash and digital payments with accurate end-of-shift balances.',
-      'Assisted with inventory, restocking, and workstation organisation.',
-    ],
-  },
 ]
 
 function ExpCard({ job }) {
@@ -76,22 +46,23 @@ function ExpCard({ job }) {
           <p className="exp-desc">{job.desc}</p>
         </div>
 
-        {/* Image pair */}
-        <div className="exp-images">
-          {job.images.map((src, i) => (
-            <div key={i} className="exp-img-wrap">
-              <div className="exp-img-fallback">
-                <i className="fas fa-image"></i>
+        {job.images && (
+          <div className="exp-images">
+            {job.images.map((src, i) => (
+              <div key={i} className="exp-img-wrap">
+                <div className="exp-img-fallback">
+                  <i className="fas fa-image"></i>
+                </div>
+                <img
+                  src={src}
+                  alt={job.title}
+                  className="exp-img"
+                  onError={e => e.currentTarget.classList.add('hidden')}
+                />
               </div>
-              <img
-                src={src}
-                alt={job.title}
-                className="exp-img"
-                onError={e => e.currentTarget.classList.add('hidden')}
-              />
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

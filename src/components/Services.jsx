@@ -5,35 +5,35 @@ import './Services.css'
 const services = [
   {
     number: '01',
-    title: 'Mobile App Development',
-    desc: 'Cross-platform apps built with React Native & Expo.',
-    tags: ['React Native', 'Expo', 'Firebase', 'REST APIs'],
-    icon: 'fas fa-mobile-alt',
-    accent: '#6c63ff',
-  },
-  {
-    number: '02',
-    title: 'Web Development',
-    desc: 'Modern responsive web apps with React & Firebase.',
-    tags: ['React', 'JavaScript', 'HTML5', 'CSS3'],
-    icon: 'fas fa-code',
-    accent: '#00b4d8',
-  },
-  {
-    number: '03',
     title: 'UI/UX Design',
-    desc: 'Clean, intuitive interfaces designed in Figma.',
-    tags: ['Figma', 'Wireframing', 'Prototyping', 'User Flow'],
+    desc: 'Figma, wireframing, prototyping, design systems, visual hierarchy, interaction design, responsive design, user-centered interfaces.',
+    tags: ['Figma', 'Wireframing', 'Prototyping', 'Design Systems', 'Interaction Design', 'Responsive Design'],
     icon: 'fas fa-pencil-ruler',
     accent: '#f72585',
   },
   {
+    number: '02',
+    title: 'Frontend Dev',
+    desc: 'React Native, Expo, Flutter, Dart, TypeScript — cross-platform app development for iOS and Android.',
+    tags: ['React Native', 'Expo', 'Flutter', 'Dart', 'TypeScript'],
+    icon: 'fas fa-mobile-alt',
+    accent: '#6c63ff',
+  },
+  {
+    number: '03',
+    title: 'Backend & Full Stack',
+    desc: 'Firebase, Supabase, SQL, auth systems, real-time sync, API integration, admin dashboards, database architecture.',
+    tags: ['Firebase', 'Supabase', 'SQL', 'REST APIs', 'Auth Systems', 'Admin Dashboards'],
+    icon: 'fas fa-code',
+    accent: '#00b4d8',
+  },
+  {
     number: '04',
-    title: 'IT Support & Systems',
-    desc: 'PC troubleshooting, network setup & hardware.',
-    tags: ['Network Setup', 'Hardware', 'Troubleshooting'],
-    icon: 'fas fa-tools',
-    accent: '#2ec4b6',
+    title: 'Cloud & AI',
+    desc: 'AWS Bedrock, RAG architecture, Amazon Knowledge Base — intelligent cloud-native AI solutions.',
+    tags: ['AWS Bedrock', 'RAG', 'Amazon Knowledge Base', 'AWS Cloud'],
+    icon: 'fas fa-cloud',
+    accent: '#ff9900',
   },
 ]
 
@@ -47,16 +47,19 @@ export default function Services() {
         <div className="svc-layout">
           {/* Left — description */}
           <div className="svc-left-col">
-            <p className="svc-eyebrow">What I Offer</p>
+            <p className="svc-eyebrow">Core Expertise</p>
             <h2 className="svc-heading">Services that<br />make an impact</h2>
             <p className="svc-subdesc">
-              From mobile apps to web platforms and IT infrastructure — I deliver end-to-end digital solutions with clean design and reliable execution.
+              From UI/UX design to full-stack development, cloud infrastructure, and AI — I deliver end-to-end digital solutions with clean design and reliable execution.
             </p>
             <ul className="svc-list">
               {services.map(s => (
                 <li key={s.number} className="svc-list-item">
-                  <i className={s.icon} style={{ color: s.accent }}></i>
-                  <span>{s.title}</span>
+                  <div className="svc-list-icon"><i className={s.icon}></i></div>
+                  <div className="svc-list-text">
+                    <span className="svc-list-title">{s.title}</span>
+                    <span className="svc-list-desc">{s.desc}</span>
+                  </div>
                 </li>
               ))}
             </ul>

@@ -1,0 +1,124 @@
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  --outer-r: 4px;
+  --p-distance: 4px;
+  background: var(--card);
+}
+
+.carousel-track {
+  display: flex;
+}
+
+.carousel-item {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background-color: var(--bg);
+  overflow: hidden;
+  cursor: grab;
+}
+
+.carousel-item:active {
+  cursor: grabbing;
+}
+
+.carousel-container.round {
+  border: 1px solid var(--border);
+}
+
+.carousel-item.round {
+  background-color: var(--bg);
+  position: relative;
+  bottom: 0.1em;
+  border: 1px solid var(--border);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.carousel-item-header.round {
+  padding: 0;
+  margin: 0;
+}
+
+.carousel-indicators-container.round {
+  position: absolute;
+  z-index: 2;
+  bottom: 3em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.carousel-item-header {
+  margin-bottom: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.carousel-icon-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-icon {
+  height: 18px;
+  width: 18px;
+  color: var(--accent);
+}
+
+.carousel-item-content {
+  padding: 16px 20px 20px;
+}
+
+.carousel-item-title {
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.carousel-item-description {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,.7);
+  line-height: 1.5;
+}
+
+.carousel-indicators-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.carousel-indicators {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+  padding: 0 8px;
+}
+
+.carousel-indicator {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+
+.carousel-indicator.active {
+  background-color: var(--accent);
+}
+
+.carousel-indicator.inactive {
+  background-color: var(--border);
+}

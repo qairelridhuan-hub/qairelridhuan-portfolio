@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './Navbar.css'
 
-const links = ['about','skills','education','experience','projects','services','contact']
+const links = ['about','skills','education','experience','projects','achievements','services','contact']
 
 const MAX_SCALE  = 1.55
 const MID_SCALE  = 1.25

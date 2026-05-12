@@ -21,6 +21,8 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .svc-eyebrow {
@@ -55,16 +57,40 @@
 
 .svc-list-item {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.88rem;
-  color: rgba(255,255,255,0.55);
+  align-items: flex-start;
+  gap: 14px;
 }
 
-.svc-list-item i {
-  font-size: 0.9rem;
-  width: 18px;
-  text-align: center;
+.svc-list-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.75);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.svc-list-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.svc-list-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+}
+
+.svc-list-desc {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.6;
 }
 
 /* ── Right column ─────────────────────────────────────────── */
@@ -72,7 +98,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60px 0;
+  padding: 120px 40px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Card inner ───────────────────────────────────────────── */
